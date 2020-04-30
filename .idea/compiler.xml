@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="searchroom_user" />
+        <module name="Test" />
+        <module name="searchroom_essearch" />
+        <module name="searchroom_house" />
+        <module name="searchroom_gateway" />
+        <module name="searchroom_sms" />
+        <module name="searchroom_home" />
+        <module name="common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="searchroom_admin" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SearchRoom" options="-parameters" />
+      <module name="Test" options="-parameters" />
+      <module name="common" options="-parameters" />
+      <module name="searchroom_admin" options="-parameters" />
+      <module name="searchroom_essearch" options="-parameters" />
+      <module name="searchroom_gateway" options="-parameters" />
+      <module name="searchroom_home" options="-parameters" />
+      <module name="searchroom_house" options="-parameters" />
+      <module name="searchroom_sms" options="-parameters" />
+      <module name="searchroom_user" options="-parameters" />
+    </option>
+  </component>
+</project>
