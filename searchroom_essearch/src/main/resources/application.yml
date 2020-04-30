@@ -1,0 +1,29 @@
+server:
+  port: 9004 #端口
+spring:
+  application:
+    name: search-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300 # es的地址
+  rabbitmq:
+    host: 127.0.0.1
+  thymeleaf:
+    cache: false # 不开启缓存
+    suffix: .html
+    prefix: classpath:templates/
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+
+feign:
+  sentinel:
+    enabled: true #开启容错（服务降级，熔断）
+
+
+
