@@ -1,0 +1,50 @@
+server:
+  port: 10000
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      discovery:
+        locator:
+          enabled: true # 与服务注册组件结合，这样就可以使用服务名的路由方式
+      routes:
+        - id: home-service
+          uri: lb://home-service #代表从注册中心获取服务，且以lb(load-balance)负载均衡方式转发
+          predicates: #路由规则
+            - Path=/home-service/** #, /static/** # 静态资源路由
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user-service/**, /admin-service/**, /static/** # 静态资源路由
+        - id: sms-service
+          uri: lb://sms-service
+          predicates:
+            - Path=
+        - id: house-service
+          uri: lb://house-service
+          predicates:
+            - Path=/houser-service/**
+        - id: search-service
+          uri: lb://search-service
+          predicates:
+            - Path=/search-service/**
+  redis:
+    host: 127.0.0.1
+
+jwt:
+  config:
+    key: searchroom #jwt言
+    ttl: 3600000 #jwt过期时间
