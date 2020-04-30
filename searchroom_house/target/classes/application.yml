@@ -1,0 +1,48 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: house-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    username: root
+    password: zxf18377217936
+    url: jdbc:mysql://127.0.0.1:3306/searchroom?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false # 不开启缓存
+    suffix: .html
+    prefix: classpath:templates/
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  rabbitmq:
+    host: 127.0.0.1 # rabbitmq
+#  aop:
+#    auto: true
+#  aop:
+#    proxy-target-class: true
+
+jwt:
+  config:
+    key: searchroom #jwt言
+    ttl: 3600000 #jwt过期时间
+
+token_name: token
+
+feign:
+  sentinel:
+    enabled: true #开启容错（服务降级，熔断）
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.zxf.dao: DEBUG #打印sql语句
+
+BAIDU_MAP_KEY: aNFKqfCsfPWDXPnUcKqO7Ob9KjcNo2Yl #百度api查询key
