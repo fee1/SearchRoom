@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="head">
+    <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/static/css/common.css" rel='stylesheet' type='text/css'/>
+</div>
+
+<header th:fragment="header" class="xunwu-header">
+    <div class="nav-wrap">
+        <div class="wrapper ">
+            <div class="fl">
+                <a class="logo" href="/" title="找房">
+                    <!--<img src="/static/images/logo.png">-->
+                </a>
+            </div>
+            <div class="fr nav">
+                <div class="fl">
+                    <ul>
+                        <li>
+                            <a class="index-page" href="/home-service/index">首页</a>
+                        </li>
+                        <li>
+                            <a class="rent-page" href="/search-service/rent/house?cityEnName=bj">租房</a>
+                        </li>
+                        <li>
+                            <a class="center-page" href="/user-service/user/center">个人中心</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fr login">
+                    <div class="ti-hover">
+                        <div class="login-panel typeUserInfo">
+                            <div id="username1">
+                                <span class="welcome">
+                                    <a class="btn-register" href="/user-service/user/loginPage"
+                                       rel="nofollow"><span id="login" class="log">免注册登录</span></a>
+                                    <!--|<a class="btn-login bounceIn actLoginBtn" href="/user/login"><span-->
+                                            <!--class="reg">登录</span></a>-->
+                                </span>
+                            </div>
+                            <div id="username2">
+                                <span class="welcome">
+                                    <a href="/user/center">
+                                        <span id="username3">
+                                            用户名
+                                        </span>
+                                    </a>
+                                </span>
+                                <span id="indexTipContainer"></span>
+                                <span class="welcome">
+                                    <a class="reg" href="javascript:void(0);" onclick="loginOut()" rel="nofollow">退出</a></span>
+                            </div>
+                        </div>
+                        <div class="user-news" id="userNews">
+                            <!-- TODO 用户消息 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div th:fragment="footer">
+    <div class="footer">
+        <div class="wrapper">
+            <div class="f-title">
+                <div class="fl">
+                    <ul>
+                        <li><a href="/" rel="nofollow" target="_blank">首页</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">了解找房</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">关于找房</a></li>
+                        <li><a href="/" rel="nofollow" target="_blank">找房合作</a></li>
+                        <li><a href="/admin/login" rel="nofollow" target="_blank">管理员登录</a></li>
+                    </ul>
+                </div>
+                <div class="fr">官方客服 xxxx-xxxx-xxxx</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="bottom">
+            <div class="copyright fl">Copyright &copy; 2017. 来找房 All rights reserved.</div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script th:inline="javascript" type="text/javascript">
+        window.onload=function (ev) {
+            var cookie_value = getCookie("token");
+            if (!(cookie_value === null || cookie_value === '')){
+                document.getElementById("username1").style.display="none";
+                document.getElementById("username2").style.display="inline";
+                $.get("/user-service/user/checkToken/"+cookie_value,function(data){
+                    if (data.code == 200 && data.message != "登录已过期"){
+                        document.getElementById("username3").innerHTML = data.message;
+                    }else{
+                        location.href="loginPage";
+                    }
+                });
+            }else {
+                document.getElementById("username1").style.display="inline";
+                document.getElementById("username2").style.display="none";
+            }
+        };
+        function loginOut() {
+            $.get("/user-service/user/loginOut",function(data){
+                if (data.code === 200){
+                    location.href = "/home-service/index";
+                }
+            });
+        }
+        function getCookie(cookie_name) {
+            var allcookies = document.cookie;
+            //索引长度，开始索引的位置
+            var cookie_pos = allcookies.indexOf(cookie_name);
+
+            // 如果找到了索引，就代表cookie存在,否则不存在
+            if (cookie_pos != -1) {
+                // 把cookie_pos放在值的开始，只要给值加1即可
+                //计算取cookie值得开始索引，加的1为“=”
+                cookie_pos = cookie_pos + cookie_name.length + 1;
+                //计算取cookie值得结束索引
+                var cookie_end = allcookies.indexOf(";", cookie_pos);
+
+                if (cookie_end == -1) {
+                    cookie_end = allcookies.length;
+
+                }
+                //得到想要的cookie的值
+                var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+            }
+            return value;
+        }
+    </script>
+</div>
+</html>

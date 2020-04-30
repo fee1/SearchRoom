@@ -1,0 +1,77 @@
+var tipStr = '<option value="">请选择</option>';
+
+function showError(message) {
+    layer.msg("Error: " + message, {icon: 5, time: 2000});
+}
+
+function changeCity(city) {
+    $.get('/user-service/admin/address/support/cities', function (data, status) {
+        if (data.code !== 200) {
+            showError(data.message);
+            return;
+        }
+        var selectedVal = city.val();
+        city.html(tipStr);
+        var str = '';
+        $.each(data.data, function (i, item) {
+            if (item.enName == selectedVal){
+                str += "<option value=" + item.enName + " selected='selected'>" + item.cnName + "</option>";
+            }else {
+                str += "<option value=" + item.enName + ">" + item.cnName + "</option>";
+            }
+        });
+        city.append(str);
+    });
+}
+
+function changeRegion(region, cityName) {
+    $.get('/user-service/admin/address/support/regions/' + cityName, function (data, status) {
+        if (data.code !== 200) {
+            showError(data.message);
+            return;
+        }
+        var selectedVal = region.val();
+        region.html(tipStr);
+
+        var str = "";
+        $.each(data.data, function (i, item) {
+            if (item.enName === selectedVal) {
+                str += "<option value=" + item.enName + " selected='selected'>" + item.cnName + "</option>";
+            } else {
+                str += "<option value=" + item.enName + ">" + item.cnName + "</option>";
+            }
+        });
+        region.append(str);
+    });
+}
+
+function changeSubwayLine(subwayLine, cityName) {
+    $.get('/user-service/admin/address/support/subway/line/' + cityName, function (data, status) {
+        if (data.code !== 200) {
+            showError(data.message);
+            return;
+        }
+        subwayLine.html(tipStr);
+        var str = "";
+        $.each(data.data, function (index, subway) {
+            str += "<option value=" + subway.id + ">" + subway.name + "</option>";
+        });
+        subwayLine.append(str);
+    })
+}
+
+function changeSubwayStation(subwayStation, subwayLineId) {
+    $.get('/user-service/admin/address/support/subwayStation/' + subwayLineId, function (data, status) {
+        if (data.code !== 200) {
+            showError(data.message);
+            return;
+        }
+
+        subwayStation.html(tipStr);
+        var str = "";
+        $.each(data.data, function (index, station) {
+            str += "<option value=" + station.id + ">" + station.name + "</option>";
+        });
+        subwayStation.append(str);
+    })
+}
