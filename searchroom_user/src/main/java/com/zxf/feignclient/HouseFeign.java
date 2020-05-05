@@ -101,10 +101,10 @@ public interface HouseFeign {
 
     /**
      * 根据ID组获取房屋列表
-     * @param substring
+     * @param houseIds
      * @return
      */
-    @GetMapping
+    @GetMapping("getHouseByIds")
     @ResponseBody
     ViewResult findHouseDTOS(@RequestParam("houseIds") String houseIds);
 }

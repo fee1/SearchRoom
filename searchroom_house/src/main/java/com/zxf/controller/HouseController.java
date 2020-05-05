@@ -181,10 +181,9 @@ public class HouseController {
      * @param houseIds
      * @return
      */
-    @GetMapping
+    @GetMapping("getHouseByIds")
     @ResponseBody
     public ViewResult findHouseDTOS(String houseIds){
-        System.out.println(houseIds);
         if (StringUtils.isBlank(houseIds)){
             return ViewResultUtil.getUnSuccess(ViewResult.Status.BADREQUEST.getCode(), "房屋ID为空");
         }
