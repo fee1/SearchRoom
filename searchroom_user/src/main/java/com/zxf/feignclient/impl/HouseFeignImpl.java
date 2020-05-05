@@ -66,4 +66,9 @@ public class HouseFeignImpl implements HouseFeign {
     public ViewResult findHouseDTOS(String houseIds) {
         return ViewResultUtil.getUnSuccess(ViewResult.Status.SERVERERROR.getCode(), "找不到服务");
     }
+
+    @Override
+    public ViewResult addHouseWatchTimes(String houseId) {
+        return ViewResultUtil.getUnSuccess(ViewResult.Status.SERVERERROR.getCode(), "找不到服务");
+    }
 }

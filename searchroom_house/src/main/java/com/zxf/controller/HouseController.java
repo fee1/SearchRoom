@@ -191,4 +191,19 @@ public class HouseController {
         return ViewResultUtil.getViewResult(serviceResult);
     }
 
+    /**
+     *
+     * @param houseId
+     * @return
+     */
+    @PostMapping("addHouseWatchTimes")
+    @ResponseBody
+    public ViewResult addHouseWatchTimes(String houseId){
+        if(StringUtils.isBlank(houseId)){
+            return ViewResultUtil.getUnSuccess(ViewResult.Status.BADREQUEST.getCode(), "房屋ID为空");
+        }
+        ServiceResult serviceResult = houseService.addHouseWatchTimes(houseId);
+        return ViewResultUtil.getViewResult(serviceResult);
+    }
+
 }

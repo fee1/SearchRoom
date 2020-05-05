@@ -103,4 +103,11 @@ public interface HouseService {
      * @return
      */
     ServiceResult findHouseDTOS(String houseIds);
+
+    /**
+     * 增加房屋的被带看次数
+     * @param houseId
+     * @return
+     */
+    ServiceResult addHouseWatchTimes(String houseId);
 }

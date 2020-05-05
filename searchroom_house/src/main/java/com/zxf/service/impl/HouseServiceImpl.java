@@ -476,5 +476,19 @@ public class HouseServiceImpl implements HouseService {
         return result;
     }
 
-
+    /**
+     * 增加房屋的被带看次数
+     * @param houseId
+     * @return
+     */
+    @Override
+    public ServiceResult addHouseWatchTimes(String houseId) {
+        House house = houseMapper.selectByPrimaryKey(Integer.valueOf(houseId));
+        house.setWatchTimes(house.getWatchTimes() + 1);
+        int i = houseMapper.updateHouse(house);
+        if (i<=0){
+            return ServiceResult.failure(ServiceResult.Status.EXCEPTION.getCode(), "修改带看数据失败");
+        }
+        return ServiceResult.seccess("修改成功");
+    }
 }

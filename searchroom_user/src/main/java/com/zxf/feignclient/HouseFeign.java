@@ -107,4 +107,13 @@ public interface HouseFeign {
     @GetMapping("getHouseByIds")
     @ResponseBody
     ViewResult findHouseDTOS(@RequestParam("houseIds") String houseIds);
+
+    /**
+     * 增加房屋带看次数
+     * @param houseId
+     * @return
+     */
+    @PostMapping("addHouseWatchTimes")
+    @ResponseBody
+    ViewResult addHouseWatchTimes(@RequestParam("houseId") String houseId);
 }

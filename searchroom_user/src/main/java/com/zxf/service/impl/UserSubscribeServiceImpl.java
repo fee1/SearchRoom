@@ -243,9 +243,15 @@ public class UserSubscribeServiceImpl implements UserSubscribeService {
     @Override
     public ServiceResult finshSubscribe(String houseId, String userId, HttpServletRequest request) {
         Date updateTime = new Date();
-        int i = houseSubscribeMapper.finshSubscribe(houseId, userId, updateTime);
-        if ( i <=0){
-            return ServiceResult.failure(ServiceResult.Status.EXCEPTION.getCode(), "数据更新失败");
+        //增加房屋被带看次数
+        ViewResult viewResult = houseFeign.addHouseWatchTimes(houseId);
+        if (viewResult.getCode() == ViewResult.Status.SUCCESS.getCode()) {
+            int i = houseSubscribeMapper.finshSubscribe(houseId, userId, updateTime);
+            if (i <= 0) {
+                return ServiceResult.failure(ServiceResult.Status.EXCEPTION.getCode(), "数据更新失败");
+            }
+        }else {
+            return ServiceResult.failure(ServiceResult.Status.EXCEPTION.getCode(), "带看次数未更新");
         }
         return ServiceResult.seccess("成功");
     }
