@@ -61,6 +61,7 @@ public class HouseSearchServiceImpl implements HouseSearchService {
             boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.regionEnName, searchVo.getRegionEnName()));
         }
         boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.status, 1));
+        boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.status, 2));
 
         //范围查询
         RentValueBlockDTO price = RentValueBlockDTO.matchPrice(searchVo.getPriceBlock());

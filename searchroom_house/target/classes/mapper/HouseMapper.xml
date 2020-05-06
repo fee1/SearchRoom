@@ -462,11 +462,11 @@
     from house
     where city_en_name = #{cityEnName,jdbcType=VARCHAR} and region_en_name = #{regionEnName,jdbcType=VARCHAR} and  district = #{district,jdbcType=VARCHAR}
   </select>
-  <select id="findHouseDTOS" parameterType="arraylist" resultMap="HouseDTO">
+  <select id="findHouseDTOS" parameterType="java.lang.String" resultMap="HouseDTO">
     select
     *
     from house a
     left join house_detail b on b.house_id = a.id
-    where a.id in (#{ids})
+    where a.id in (${ids})
   </select>
 </mapper>
