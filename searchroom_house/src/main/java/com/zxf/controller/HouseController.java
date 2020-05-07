@@ -192,7 +192,7 @@ public class HouseController {
     }
 
     /**
-     *
+     * 增加用户带看次数
      * @param houseId
      * @return
      */
