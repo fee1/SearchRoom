@@ -11,7 +11,7 @@ spring:
     host: 127.0.0.1
 aliyun:
   sms:
-    accessKeyId: LTAIULJq0YmVBn6Q
-    accessKeySecret: c3EjNBFqIbVePulRetOPjGIYBCKgHj
-    template_code: SMS_187745070
+    accessKeyId: ****
+    accessKeySecret: ****
+    template_code: ****
     sign_name: 找房网-短信验证码
