@@ -56,8 +56,8 @@ feign:
 aliyunoos:
   config:
     endpoint: http://oss-cn-shanghai.aliyuncs.com
-    accessKeyId: LTAIg55KbXYd0siu
-    accessKeySecret: R83RfUVDXa68cHpX4WlCqOnATJS7sh
+    accessKeyId: ****
+    accessKeySecret: ****
     bucketName: searchroom
     objectName: images/
     url: https://searchroom.oss-cn-shanghai.aliyuncs.com/images/
