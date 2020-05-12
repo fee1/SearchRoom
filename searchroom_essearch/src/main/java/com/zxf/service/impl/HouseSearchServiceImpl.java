@@ -60,8 +60,12 @@ public class HouseSearchServiceImpl implements HouseSearchService {
         if (StringUtils.isNotBlank(searchVo.getRegionEnName()) && !StringUtils.equals(searchVo.getRegionEnName(), "*")){
             boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.regionEnName, searchVo.getRegionEnName()));
         }
-        boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.status, 1));
-        boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.status, 2));
+
+        List<Integer> value = new ArrayList<>();
+        value.add(1);
+        value.add(2);
+        boolQueryBuilder.filter(QueryBuilders.termsQuery(HouseConstant.status, value));
+//        boolQueryBuilder.filter(QueryBuilders.termQuery(HouseConstant.status, 2));
 
         //范围查询
         RentValueBlockDTO price = RentValueBlockDTO.matchPrice(searchVo.getPriceBlock());
